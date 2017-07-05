@@ -2,6 +2,8 @@
 
 namespace Fruitware\VictoriaBankGateway\VictoriaBank;
 
+use Fruitware\VictoriaBankGateway\VictoriaBankGateway;
+
 /**
  * Class Response
  */
@@ -70,6 +72,9 @@ abstract class Response implements ResponseInterface
             }
         }
 
+        $this->_responseFields[self::ORDER] = VictoriaBankGateway::normalizeOrderId($this->_responseFields[self::ORDER]);
+        $this->_responseFields[self::AMOUNT] = VictoriaBankGateway::normalizeAmount($this->_responseFields[self::AMOUNT]);
+
         return $this;
     }
 
@@ -121,16 +126,18 @@ abstract class Response implements ResponseInterface
      */
     protected function _validateSignature()
     {
-        $action       = $this->_responseFields[self::ACTION];
-        $rc           = $this->_responseFields[self::RC];
-        $rrn          = $this->_responseFields[self::RRN];
-        $order        = $this->_responseFields[self::ORDER];
-        $amount       = $this->_responseFields[self::AMOUNT];
-        $pSign        = $this->_responseFields[self::P_SIGN];
-        $mac          = strlen($action).$action.strlen($rc).$rc.strlen($rrn).$rrn.strlen($order).$order.strlen($amount).$amount;
+        $mac = '';
+        foreach ([self::ACTION, self::RC, self::RRN, self::ORDER, self::AMOUNT] as $field) {
+            $value = $this->_responseFields[$field];
+            if ($value != '-') {
+                $mac .= strlen($value).$value;
+            } else {
+                $mac .= $value;
+            }
+        }
         $macHash      = strtoupper(md5($mac));
+        $pSign        = $this->_responseFields[self::P_SIGN];
         $encryptedBin = hex2bin($pSign);
-        $decryptedBin = null;
         if (!file_exists(self::$bankPublicKeyPath) || !$rsaKey = file_get_contents(self::$bankPublicKeyPath)) {
             throw new Exception('Failed to generate response signature: Bank key not accessible');
         }
@@ -142,7 +149,7 @@ abstract class Response implements ResponseInterface
             while ($msg = openssl_error_string()) {
                 $errorMsg .= $msg."<br />\n";
             }
-            throw new Exception('Failed to generate response signature: '.$errorMsg);
+            throw new Exception('Failed decrypt response signature: '.$errorMsg);
         }
         $decrypted     = strtoupper(bin2hex($decryptedBin));
         $decryptedHash = str_replace(self::$signaturePrefix, '', $decrypted);

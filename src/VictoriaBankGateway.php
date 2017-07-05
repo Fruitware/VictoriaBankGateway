@@ -502,7 +502,7 @@ class VictoriaBankGateway
      *
      * @return string
      */
-    protected function normalizeOrderId($code)
+    static public function normalizeOrderId($code)
     {
         return sprintf('%06s', $code);
     }
@@ -514,7 +514,7 @@ class VictoriaBankGateway
      *
      * @return string
      */
-    protected function deNormalizeOrderId($code)
+    static public function deNormalizeOrderId($code)
     {
         return ltrim($code, '0');
     }
@@ -524,7 +524,7 @@ class VictoriaBankGateway
      *
      * @return mixed
      */
-    protected function normalizeAmount($amount)
+    static public function normalizeAmount($amount)
     {
         return str_replace(',', '.', (string)$amount);
     }

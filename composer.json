@@ -20,8 +20,20 @@
 	"require": {
 		"php": ">=5.5"
 	},
+	"require-dev": {
+		"phpunit/phpunit": "^5.0",
+		"squizlabs/php_codesniffer": "^2.5"
+	},
 	"suggest": {
 		"monolog/monolog": "^1.0"
+	},
+	"scripts": {
+		"test": "phpunit --colors=always",
+		"fasttest": "phpdbg -qrr vendor/bin/phpunit --colors=always",
+		"lint": "phpcs",
+		"fmt": "phpcbf",
+		"doc": "php bin/apigen.phar generate",
+		"metrics": "php bin/phpmetrics.phar --report-html=artifacts/metrics.html src/"
 	},
 	"autoload": {
 		"psr-4": {

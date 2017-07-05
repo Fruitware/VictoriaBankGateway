@@ -2,6 +2,8 @@
 
 namespace Fruitware\VictoriaBankGateway\VictoriaBank;
 
+use Fruitware\VictoriaBankGateway\VictoriaBankGateway;
+
 abstract class Request implements RequestInterface
 {
     /**
@@ -124,46 +126,53 @@ abstract class Request implements RequestInterface
      * @param string $nonce
      * @param string $timestamp
      * @param string $trType
-     * @param float $amount
+     * @param float  $amount
      *
      * @return string
      * @throws Exception
      */
     protected function _createSignature($order, $nonce, $timestamp, $trType, $amount)
     {
+        $mac = '';
         if (empty($order) || empty($nonce) || empty($timestamp) || is_null($trType) || empty($amount)) {
             throw new Exception('Failed to generate transaction signature: Invalid request params');
         }
         if (!file_exists(self::$privateKeyPath) || !$rsaKey = file_get_contents(self::$privateKeyPath)) {
             throw new Exception('Failed to generate transaction signature: Private key not accessible');
         }
-        $rsaKeyResource = openssl_get_privatekey($rsaKey);
-        if (!$rsaKeyResource) {
-            throw new Exception('Failed to generate transaction signature: Failed to get private key');
+        $data = [
+            'ORDER' => VictoriaBankGateway::normalizeOrderId($order),
+            'NONCE' => $nonce,
+            'TIMESTAMP' => $timestamp,
+            'TRTYPE' => $trType,
+            'AMOUNT' => VictoriaBankGateway::normalizeAmount($amount),
+        ];
+        if (!$rsaKeyResource = openssl_get_privatekey($rsaKey)) {
+            die ('Failed get private key');
         }
         $rsaKeyDetails = openssl_pkey_get_details($rsaKeyResource);
         $rsaKeyLength  = $rsaKeyDetails['bits'] / 8;
-        // Data before md5
-        $mac     = strlen($order).$order.strlen($nonce).$nonce.strlen($timestamp).$timestamp.strlen($trType).$trType.strlen($amount).$amount;
-        $macHash = md5($mac);
-        // Concatenated mac with encryption data
-        $signature     = self::$signatureFirst;
-        $paddingLength = $rsaKeyLength - strlen($macHash) / 2 - strlen(self::$signaturePrefix) / 2 - strlen(self::$signatureFirst) / 2;
-        for ($i = 0; $i < $paddingLength; $i++) {
-            $signature .= self::$signaturePadding;
+        foreach ($data as $Id => $filed) {
+            $mac .= strlen($filed).$filed;
         }
-        $signature .= self::$signaturePrefix.$macHash;
-        $bin       = pack("H*", $signature);
-        if (!openssl_private_encrypt($bin, $encryptedBin, $rsaKeyResource, OPENSSL_NO_PADDING)) {
-            $errorMsg = '';
+        $first   = static::$signatureFirst;
+        $prefix  = static::$signaturePadding.static::$signaturePrefix;
+        $md5Hash = md5($mac);
+        $data    = $first;
+        $paddingLength = $rsaKeyLength - strlen($md5Hash) / 2 - strlen($prefix) / 2 - strlen($first) / 2;
+        for ($i = 0; $i < $paddingLength; $i++) {
+            $data .= "FF";
+        }
+        $data .= $prefix.$md5Hash;
+        $bin  = pack("H*", $data);
+        if (!openssl_private_encrypt($bin, $encryptedBin, $rsaKey, OPENSSL_NO_PADDING)) {
             while ($msg = openssl_error_string()) {
-                echo $errorMsg."<br />\n";
+                echo $msg."<br />\n";
             }
-            #throw new Exception('Failed to generate transaction signature: Failed to encrypt the bin - ' . $errorMsg);
-            throw new Exception('Failed to generate transaction signature: Failed to encrypt the bin');
+            die ('Failed encrypt');
         }
         $pSign = bin2hex($encryptedBin);
 
-        return $pSign;
+        return strtoupper($pSign);
     }
 }

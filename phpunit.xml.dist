@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit
+        backupGlobals="false"
+        backupStaticAttributes="false"
+        bootstrap="Tests/bootstrap.php"
+        colors="true"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        processIsolation="false"
+        stopOnFailure="false"
+        syntaxCheck="false">
+    <testsuites>
+        <testsuite>
+            <directory>./Tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./src/</directory>
+        </whitelist>
+    </filter>
+
+    <logging>
+        <log
+                type="coverage-html"
+                target="artifacts/coverage/"
+                charset="UTF-8"
+                highlight="true"/>
+        <log type="coverage-clover" target="artifacts/clover.xml"/>
+    </logging>
+
+    <php>
+        <env name="VICTORIA_BANK_MERCHANT_ID" value="100000010000000"/>
+        <env name="VICTORIA_BANK_MERCHANT_TERMINAL" value="10000000"/>
+        <env name="VICTORIA_BANK_MERCHANT_URL" value="http://example.com"/>
+        <env name="VICTORIA_BANK_MERCHANT_NAME" value="Merchant company name"/>
+        <env name="VICTORIA_BANK_MERCHANT_ADDRESS" value="Merchant address"/>
+        <env name="VICTORIA_BANK_SECURITY_SIGNATURE_FIRST" value="0001"/>
+        <env name="VICTORIA_BANK_SECURITY_SIGNATURE_PREFIX" value="3020300C06082A864886F70D020505000410"/>
+        <env name="VICTORIA_BANK_SECURITY_SIGNATURE_PADDING" value="00"/>
+        <env name="VICTORIA_BANK_MERCHANT_PUBLIC_KEY`" value="public.pem"/>
+        <env name="VICTORIA_BANK_MERCHANT_PRIVATE_KEY`" value="private.pem"/>
+        <env name="VICTORIA_BANK_MERCHANT_BANK_PUBLIC_KEY`" value="victoria_pub.pem"/>
+        <env name="VICTORIA_BANK_MERCHANT_TIMEZONE_NAME`" value="Europe/Chisinau"/>
+        <env name="VICTORIA_BANK_MERCHANT_COUNTRY_CODE`" value="MD"/>
+        <env name="VICTORIA_BANK_MERCHANT_DEFAULT_CURRENCY`" value="MDL"/>
+        <env name="VICTORIA_BANK_MERCHANT_DEFAULT_LANGUAGE`" value="ro"/>
+    </php>
+</phpunit>

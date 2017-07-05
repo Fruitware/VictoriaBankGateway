@@ -1,0 +1,25 @@
+language: php
+sudo: false
+
+cache: vendor
+
+php:
+    - 5.5
+    - 5.6
+    - 7.0
+    - hhvm
+
+before_install:
+    - composer self-update
+    - composer global require hirak/prestissimo
+    - composer install
+
+install:
+    - ./vendor/bin/phpunit --coverage-text
+
+script:
+  - composer test
+
+after_success:
+  - php bin/ocular.phar code-coverage:upload --format=php-clover artifacts/clover.xml
+  - php bin/coveralls.phar -v
