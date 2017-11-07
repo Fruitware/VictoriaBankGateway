@@ -35,6 +35,12 @@ abstract class Request implements RequestInterface
      * @var string
      */
     static public $privateKeyPath;
+    
+    /**
+     * Private key passphrase
+     * @var string
+     */
+    static public $privateKeyPass;
 
     /**
      * @var bool
@@ -147,7 +153,7 @@ abstract class Request implements RequestInterface
             'TRTYPE' => $trType,
             'AMOUNT' => VictoriaBankGateway::normalizeAmount($amount),
         ];
-        if (!$rsaKeyResource = openssl_get_privatekey($rsaKey)) {
+        if (!$rsaKeyResource = openssl_get_privatekey($rsaKey, self::$privateKeyPass)) {
             die ('Failed get private key');
         }
         $rsaKeyDetails = openssl_pkey_get_details($rsaKeyResource);

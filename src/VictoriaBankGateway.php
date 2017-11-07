@@ -328,7 +328,7 @@ class VictoriaBankGateway
         return $this;
     }
 
-    public function setSecurityOptions($signatureFirst, $signaturePrefix, $signaturePadding, $publicKeyPath, $privateKeyPath, $bankPublicKeyPath)
+    public function setSecurityOptions($signatureFirst, $signaturePrefix, $signaturePadding, $publicKeyPath, $privateKeyPath, $bankPublicKeyPath, $privateKeyPass='')
     {
         #Request security options
         VictoriaBank\Request::$signatureFirst   = $signatureFirst;
@@ -336,6 +336,7 @@ class VictoriaBankGateway
         VictoriaBank\Request::$signaturePadding = $signaturePadding;
         VictoriaBank\Request::$publicKeyPath    = $publicKeyPath;
         VictoriaBank\Request::$privateKeyPath   = $privateKeyPath;
+        VictoriaBank\Request::$privateKeyPass   = $privateKeyPass;
         #Response security options
         VictoriaBank\Response::$signaturePrefix   = $signaturePrefix;
         VictoriaBank\Response::$bankPublicKeyPath = $bankPublicKeyPath;
