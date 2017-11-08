@@ -129,7 +129,7 @@ if (!$bankResponse->isValid()) {
 
 switch ($bankResponse::TRX_TYPE) {
     case VictoriaBankGateway::TRX_TYPE_AUTHORIZATION:
-        $amount         = $bankResponse->{AuthorizationResponse::AMOUNT};
+        $amount         = $bankResponse->{Response::AMOUNT};
         $bankOrderCode  = $bankResponse->{Response::ORDER};
         $rrn            = $bankResponse->{Response::RRN};
         $intRef         = $bankResponse->{Response::INT_REF};
