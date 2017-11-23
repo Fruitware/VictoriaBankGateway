@@ -32,12 +32,16 @@ abstract class Response implements ResponseInterface
         self::CURRENCY => null,
         self::ACTION => null,
         self::RC => null,
+        self::TEXT => null,
         self::APPROVAL => null,
         self::RRN => null,
         self::INT_REF => null,
         self::TIMESTAMP => null,
         self::NONCE => null,
         self::P_SIGN => null,
+        self::BIN => null,
+        self::CARD => null,
+        self::AUTH => null,
         self::ECI => null,
     ];
 
