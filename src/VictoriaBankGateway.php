@@ -462,7 +462,7 @@ class VictoriaBankGateway
                 throw $e;
             } else {
                 throw new VictoriaBank\Exception(
-                    'Completion request to the payment gateway failed. Please contact '.$this->merchantUrl.' for further details.'.$e->getMessage()
+                    'Reversal request to the payment gateway failed. Please contact '.$this->merchantUrl.' for further details.'.$e->getMessage()
                 );
             }
         }
