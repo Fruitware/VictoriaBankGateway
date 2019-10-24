@@ -4,6 +4,11 @@ namespace Fruitware\VictoriaBankGateway\VictoriaBank;
 
 use Fruitware\VictoriaBankGateway\VictoriaBankGateway;
 
+/**
+ * Class Request
+ *
+ * @package Fruitware\VictoriaBankGateway\VictoriaBank
+ */
 abstract class Request implements RequestInterface
 {
     /**

@@ -1,43 +1,51 @@
 {
-	"name": "fruitware/victoria-bank-gateway",
-	"type": "library",
-	"description": "Victoria bank e-Commerce Gateway merchant interface",
-	"keywords": [
-		"victoria",
-		"bank",
-		"payment",
-		"gateway"
-	],
-	"homepage": "https://github.com/Fruitware/VictoriaBankGateway",
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "Coroliov Oleg",
-			"email": "ruscon@gmail.com",
-			"homepage": "https://github.com/ruscon"
-		}
-	],
-	"require": {
-		"php": ">=5.5"
-	},
-	"require-dev": {
-		"phpunit/phpunit": "^5.0",
-		"squizlabs/php_codesniffer": "^2.5"
-	},
-	"suggest": {
-		"monolog/monolog": "^1.0"
-	},
-	"scripts": {
-		"test": "phpunit --colors=always",
-		"fasttest": "phpdbg -qrr vendor/bin/phpunit --colors=always",
-		"lint": "phpcs",
-		"fmt": "phpcbf",
-		"doc": "php bin/apigen.phar generate",
-		"metrics": "php bin/phpmetrics.phar --report-html=artifacts/metrics.html src/"
-	},
-	"autoload": {
-		"psr-4": {
-			"Fruitware\\VictoriaBankGateway\\": "src/"
-		}
-	}
+    "name": "fruitware/victoria-bank-gateway",
+    "type": "library",
+    "description": "Victoria bank e-Commerce Gateway merchant interface",
+    "keywords": [
+        "victoria",
+        "bank",
+        "payment",
+        "gateway"
+    ],
+    "homepage": "https://github.com/Fruitware/VictoriaBankGateway",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Coroliov Oleg",
+            "email": "ruscon@gmail.com",
+            "homepage": "https://github.com/ruscon",
+            "role": "Developer"
+        },
+        {
+            "name": "Serge Beresnev",
+            "email": "serge@fruitware.ru",
+            "homepage": "https://github.com/keriat",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.5",
+        "ext-openssl": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.0",
+        "squizlabs/php_codesniffer": "^2.5"
+    },
+    "suggest": {
+        "monolog/monolog": "^1.0"
+    },
+    "scripts": {
+        "test": "phpunit --colors=always",
+        "fasttest": "phpdbg -qrr vendor/bin/phpunit --colors=always",
+        "lint": "phpcs",
+        "fmt": "phpcbf",
+        "doc": "php bin/apigen.phar generate",
+        "metrics": "php bin/phpmetrics.phar --report-html=artifacts/metrics.html src/"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fruitware\\VictoriaBankGateway\\": "src/"
+        }
+    }
 }
