@@ -3,8 +3,14 @@
 namespace Fruitware\VictoriaBankGateway\Tests;
 
 use Fruitware\VictoriaBankGateway\VictoriaBankGateway;
+use PHPUnit_Framework_TestCase;
 
-class VictoriaBankGatewayTest extends \PHPUnit_Framework_TestCase
+/**
+ * Class VictoriaBankGatewayTest
+ *
+ * @package Fruitware\VictoriaBankGateway\Tests
+ */
+class VictoriaBankGatewayTest extends PHPUnit_Framework_TestCase
 {
     public function testInit() {
         $victoriaBankGatewayTest =  new VictoriaBankGateway();
@@ -13,6 +19,6 @@ class VictoriaBankGatewayTest extends \PHPUnit_Framework_TestCase
             ->setDebug(false)
             ->setDefaultLanguage('en')
         ;
-        $this->assertEquals('1', '1');
+        static::assertEquals('1', '1');
     }
 }

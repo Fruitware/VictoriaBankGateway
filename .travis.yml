@@ -1,7 +1,7 @@
 language: php
 sudo: false
 
-cache: vendor
+cache: packages
 
 php:
     - 5.5
