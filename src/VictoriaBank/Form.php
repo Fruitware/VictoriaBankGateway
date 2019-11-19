@@ -2,6 +2,11 @@
 
 namespace Fruitware\VictoriaBankGateway\VictoriaBank;
 
+/**
+ * Class Form
+ *
+ * @package Fruitware\VictoriaBankGateway\VictoriaBank
+ */
 class Form
 {
     const ELEMENT_TEXT   = 'text';
@@ -69,6 +74,14 @@ class Form
         return $this;
     }
 
+    /**
+     * @param $type
+     * @param $elementName
+     * @param $elementValue
+     * @param $elementOptions
+     *
+     * @return string
+     */
     protected function _renderElement($type, $elementName, $elementValue, $elementOptions)
     {
         $options = '';

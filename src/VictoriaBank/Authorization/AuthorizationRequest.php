@@ -7,6 +7,11 @@ use Fruitware\VictoriaBankGateway\VictoriaBank\Form;
 use Fruitware\VictoriaBankGateway\VictoriaBank\Request;
 use Fruitware\VictoriaBankGateway\VictoriaBankGateway;
 
+/**
+ * Class AuthorizationRequest
+ *
+ * @package Fruitware\VictoriaBankGateway\VictoriaBank\Authorization
+ */
 class AuthorizationRequest extends Request
 {
     #Visible authorization request fields
@@ -55,6 +60,7 @@ class AuthorizationRequest extends Request
 
     /**
      *
+     * @throws \Fruitware\VictoriaBankGateway\VictoriaBank\Exception
      */
     protected function init()
     {

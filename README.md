@@ -1,16 +1,30 @@
-#### Requirements
+# Welcome to VictoriaBank Merchant e-Commerce Library 👋
 
-* PHP >= 5.5
+[![GitHub issues](https://img.shields.io/github/issues/Fruitware/VictoriaBankGateway)](https://github.com/Fruitware/VictoriaBankGateway/issues)
+[![Version](https://img.shields.io/packagist/v/fruitware/victoria-bank-gateway)](https://packagist.org/packages/fruitware/victoria-bank-gateway)
+![Packagist](https://img.shields.io/packagist/l/fruitware/victoria-bank-gateway)
+[![Donate](https://img.shields.io/badge/donate-PayPal-%2337a556)]( https://paypal.me/fruitware?locale.x=en_US)
 
-#### Installation
+---
 
-```bash
+> Packagist package (library) to give any php-based website an access to the interface of VictoriaBank (Republic Of Moldova) that merchant systems use to process credit card based e- commerce transactions using the standard CGI/WWW forms posting method. This interface transparently supports various cardholder authentication protocols such as 3-D Secure and Secure Code as well as legacy unauthenticated SSL commerce transactions.
+
+#### 🏠 [Homepage](https://github.com/Fruitware/VictoriaBankGateway)
+
+## Install
+
+```sh
 composer require fruitware/victoria-bank-gateway
 ```
 
-#### Usage
+### Requirements
 
-##### Step 1. Environment configuration (not required)
+* PHP >= 5.5
+* OpenSSL >=0.9.8 
+
+## Usage
+
+### Step 1. Environment configuration (not required)
 
 You can use one of the composer packages
 ```bash
@@ -74,9 +88,9 @@ VICTORIA_BANK_MERCHANT_DEFAULT_CURRENCY=MDL
 VICTORIA_BANK_MERCHANT_DEFAULT_LANGUAGE=ro
 ```
 
-##### Step 2. Init Gateway client
+### Step 2. Init Gateway client
 
-##### Init Gateway client through configureFromEnv method
+#### Init Gateway client through configureFromEnv method
 
 ```php
 <?php
@@ -91,12 +105,12 @@ $victoriaBankGateway
 ;
 ```
 
-##### Init Gateway client manually
+#### Init Gateway client manually
 
 You can reproduce implementation of the configureFromEnv() method
 
 
-##### Step 3. Request payment authorization - redirects to the banks page
+### Step 3. Request payment authorization - redirects to the banks page
 
 ```php
 <?php
@@ -110,7 +124,7 @@ $victoriaBankGateway
 ;
 ```
 
-##### Step 4. Receive bank responses - all bank responses are asynchronous server to server and are handled by same URI
+### Step 4. Receive bank responses - all bank responses are asynchronous server to server and are handled by same URI
 
 ```php
 <?php
@@ -155,7 +169,7 @@ switch ($bankResponse::TRX_TYPE) {
 }
 ```
 
-##### Step 5. Request reversal (refund)
+### Step 5. Request reversal (refund)
 
 ```$rrn``` and ```$intRef``` must be saved on the step 4
 
@@ -169,3 +183,20 @@ $victoriaBankGateway
     ->requestReversal($orderId = 1, $amount = 1, $rrn = 'xxx', $intRef = 'yyy', $currency = null)
 ;
 ```
+
+## Author
+
+👤 Lovely handcrafted by **Fruitware team**
+
+* Twitter: [@fruitware](https://twitter.com/fruitware)
+* Github: [@fruitware](https://github.com/fruitware)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/Fruitware/VictoriaBankGateway/issues).
+
+## Show your support 
+
+Give a ⭐ if this project helped you!
+
+[![Donate](https://img.shields.io/badge/donate-PayPal-%2337a556)]( https://paypal.me/fruitware?locale.x=en_US)

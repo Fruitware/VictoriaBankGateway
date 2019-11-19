@@ -2,16 +2,21 @@
 
 namespace Fruitware\VictoriaBankGateway\VictoriaBank;
 
+/**
+ * Interface ResponseInterface
+ *
+ * @package Fruitware\VictoriaBankGateway\VictoriaBank
+ */
 interface ResponseInterface
 {
     const TRX_TYPE = 0;
 
-    const TERMINAL  = 'TERMINAL';   #Size: 8, Echo from the request
-    const TRTYPE    = 'TRTYPE';     #Size: 2, Echo from the request
-    const ORDER     = 'ORDER';      #Size: 6-32, Echo from the request
-    const AMOUNT    = 'AMOUNT';     #Size: 12, Echo from the request
-    const CURRENCY  = 'CURRENCY';   #Size: 3, Echo from the request
-    const ACTION    = 'ACTION';     #Size: 1, E-Gateway action code: 0 – Transaction successfully completed;1 – Duplicate transaction detected;2 – Transaction declined;3 – Transaction processing fault.
+    const TERMINAL = 'TERMINAL';   #Size: 8, Echo from the request
+    const TRTYPE   = 'TRTYPE';     #Size: 2, Echo from the request
+    const ORDER    = 'ORDER';      #Size: 6-32, Echo from the request
+    const AMOUNT   = 'AMOUNT';     #Size: 12, Echo from the request
+    const CURRENCY = 'CURRENCY';   #Size: 3, Echo from the request
+    const ACTION   = 'ACTION';     #Size: 1, E-Gateway action code: 0 – Transaction successfully completed;1 – Duplicate transaction detected;2 – Transaction declined;3 – Transaction processing fault.
     const RC        = 'RC';         #Size: 02, Transaction response code (ISO-8583 Field 39)
     const TEXT      = 'TEXT';
     const APPROVAL  = 'APPROVAL';   #Size: 06, Client bank’s approval code (ISO-8583 Field 38). Can be empty if not provided by card management system.
