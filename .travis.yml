@@ -1,21 +1,21 @@
 language: php
 sudo: false
 
-cache: vendor
+cache: packages
 
 php:
-    - 5.5
-    - 5.6
-    - 7.0
-    - hhvm
+  - 5.5
+  - 5.6
+  - 7.0
+  - hhvm
 
 before_install:
-    - composer self-update
-    - composer global require hirak/prestissimo
-    - composer install
+  - composer self-update
+  - composer global require hirak/prestissimo
+  - composer install
 
 install:
-    - ./vendor/bin/phpunit --coverage-text
+  - ./vendor/bin/phpunit --coverage-text
 
 script:
   - composer test

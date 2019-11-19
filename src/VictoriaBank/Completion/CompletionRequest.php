@@ -6,6 +6,11 @@ use Fruitware\VictoriaBankGateway\VictoriaBank\Exception;
 use Fruitware\VictoriaBankGateway\VictoriaBank\Request;
 use Fruitware\VictoriaBankGateway\VictoriaBankGateway;
 
+/**
+ * Class CompletionRequest
+ *
+ * @package Fruitware\VictoriaBankGateway\VictoriaBank\Completion
+ */
 class CompletionRequest extends Request
 {
 
@@ -35,6 +40,10 @@ class CompletionRequest extends Request
         self::P_SIGN => null,
     ];
 
+    /**
+     * @return \Fruitware\VictoriaBankGateway\VictoriaBank\Request|void
+     * @throws \Fruitware\VictoriaBankGateway\VictoriaBank\Exception
+     */
     protected function init()
     {
         parent::init();

@@ -2,6 +2,11 @@
 
 namespace Fruitware\VictoriaBankGateway\VictoriaBank;
 
+/**
+ * Interface RequestInterface
+ *
+ * @package Fruitware\VictoriaBankGateway\VictoriaBank
+ */
 interface RequestInterface
 {
     /**
