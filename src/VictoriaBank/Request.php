@@ -53,6 +53,11 @@ abstract class Request implements RequestInterface
     protected $_debugMode = false;
 
     /**
+     * @var bool
+     */
+    protected $_sslVerify = true;
+
+    /**
      * @var string
      */
     protected $_gatewayUrl;
@@ -68,10 +73,11 @@ abstract class Request implements RequestInterface
      * @param array  $requestParams
      * @param string $gatewayUrl
      * @param bool   $debugMode
+     * @param bool   $sslVerify
      *
      * @throws Exception
      */
-    public function __construct(array $requestParams, $gatewayUrl, $debugMode = false)
+    public function __construct(array $requestParams, $gatewayUrl, $debugMode = false, $sslVerify = true)
     {
         #Push the request field values
         foreach ($requestParams as $name => $value) {
@@ -85,6 +91,8 @@ abstract class Request implements RequestInterface
         $this->_gatewayUrl = $gatewayUrl;
         #Set debug mode
         $this->_debugMode = $debugMode;
+        #Set SSL verify mode
+        $this->_sslVerify = $sslVerify;
 
         #Make sure to set these static params prior to calling the request
         if (is_null(self::$signatureFirst)) {
@@ -125,6 +133,18 @@ abstract class Request implements RequestInterface
     public function setDebugMode($debugMode)
     {
         $this->_debugMode = (boolean)$debugMode;
+
+        return $this;
+    }
+
+    /**
+     * @param boolean $sslVerify
+     *
+     * @return $this
+     */
+    public function setSslVerify($sslVerify)
+    {
+        $this->_sslVerify = (boolean)$sslVerify;
 
         return $this;
     }
