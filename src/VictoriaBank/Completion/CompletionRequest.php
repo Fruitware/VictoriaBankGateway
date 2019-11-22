@@ -67,34 +67,34 @@ class CompletionRequest extends Request
         if (!isset($this->_requestFields[self::AMOUNT]) || strlen($this->_requestFields[self::AMOUNT]) < 1 || strlen(
                                                                                                                   $this->_requestFields[self::AMOUNT]
                                                                                                               ) > 12) {
-            throw new Exception('Authorization request failed: invalid '.self::AMOUNT);
+            throw new Exception('Completion request failed: invalid '.self::AMOUNT);
         }
         if (!isset($this->_requestFields[self::CURRENCY]) || strlen($this->_requestFields[self::CURRENCY]) != 3) {
-            throw new Exception('Authorization request failed: invalid '.self::CURRENCY);
+            throw new Exception('Completion request failed: invalid '.self::CURRENCY);
         }
         if (!isset($this->_requestFields[self::ORDER]) || strlen($this->_requestFields[self::ORDER]) < 6 || strlen(
                                                                                                                 $this->_requestFields[self::ORDER]
                                                                                                             ) > 32) {
-            throw new Exception('Authorization request failed: invalid '.self::ORDER);
+            throw new Exception('Completion request failed: invalid '.self::ORDER);
         }
         if (!isset($this->_requestFields[self::TERMINAL]) || strlen($this->_requestFields[self::TERMINAL]) != 8) {
-            throw new Exception('Authorization request failed: invalid '.self::TERMINAL);
+            throw new Exception('Completion request failed: invalid '.self::TERMINAL);
         }
         if (!isset($this->_requestFields[self::TIMESTAMP]) || strlen($this->_requestFields[self::TIMESTAMP]) != 14) {
-            throw new Exception('Authorization request failed: invalid '.self::TIMESTAMP);
+            throw new Exception('Completion request failed: invalid '.self::TIMESTAMP);
         }
         if (!isset($this->_requestFields[self::NONCE]) || strlen($this->_requestFields[self::NONCE]) < 20 || strlen(
                                                                                                                  $this->_requestFields[self::NONCE]
                                                                                                              ) > 32) {
-            throw new Exception('Authorization request failed: invalid '.self::NONCE);
+            throw new Exception('Completion request failed: invalid '.self::NONCE);
         }
         if (!isset($this->_requestFields[self::RRN]) || strlen($this->_requestFields[self::RRN]) != 12) {
-            throw new Exception('Authorization request failed: invalid '.self::RRN);
+            throw new Exception('Completion request failed: invalid '.self::RRN);
         }
         if (!isset($this->_requestFields[self::INT_REF]) || strlen($this->_requestFields[self::INT_REF]) < 1 || strlen(
                                                                                                                     $this->_requestFields[self::INT_REF]
                                                                                                                 ) > 32) {
-            throw new Exception('Authorization request failed: invalid '.self::INT_REF);
+            throw new Exception('Completion request failed: invalid '.self::INT_REF);
         }
 
         return $this;

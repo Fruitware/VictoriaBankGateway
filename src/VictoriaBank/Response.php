@@ -59,12 +59,12 @@ abstract class Response implements ResponseInterface
      */
     public function __construct(array $responseData)
     {
-        #Make sure to set these static params prior to calling the request
+        #Make sure to set these static params prior to calling the response
         if (is_null(self::$bankPublicKeyPath)) {
-            throw new Exception('Could not instantiate the bank request - missing parameter bankPublicKeyPath');
+            throw new Exception('Could not instantiate the bank response - missing parameter bankPublicKeyPath');
         }
         if (is_null(self::$signaturePrefix)) {
-            throw new Exception('Could not instantiate the bank request - missing parameter signaturePrefix');
+            throw new Exception('Could not instantiate the bank response - missing parameter signaturePrefix');
         }
         if (empty($responseData)) {
             throw new Exception('Bank response error: Empty data received');
