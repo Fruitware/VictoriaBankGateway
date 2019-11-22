@@ -15,7 +15,7 @@ interface RequestInterface
      * @param array $requestParams
      * @param bool  $debugMode
      */
-    public function __construct(array $requestParams, $debugMode = false);
+    public function __construct(array $requestParams, $gatewayUrl, $debugMode = false);
 
     /**
      * @param bool $debugMode
@@ -23,6 +23,13 @@ interface RequestInterface
      * @return $this
      */
     public function setDebugMode($debugMode);
+
+    /**
+     * @param string $gatewayUrl
+     *
+     * @return $this
+     */
+    public function setGatewayUrl($gatewayUrl);
 
     /**
      * Performs the actual request

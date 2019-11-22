@@ -24,6 +24,16 @@ class VictoriaBankGateway
     private $debug = false;
 
     /**
+     * @var bool
+     */
+    private $sslVerify = true;
+
+    /**
+     * @var string
+     */
+    private $gatewayUrl = 'https://egateway.victoriabank.md/cgi-bin/cgi_link';
+
+    /**
      * @var string
      */
     private $merchant;
@@ -175,6 +185,34 @@ class VictoriaBankGateway
     public function setDebug($debug)
     {
         $this->debug = (boolean)$debug;
+
+        return $this;
+    }
+
+    /**
+     * SSL verify mode setter
+     *
+     * @param boolean $sslVerify
+     *
+     * @return $this
+     */
+    public function setSslVerify($sslVerify)
+    {
+        $this->sslVerify = (boolean)$sslVerify;
+
+        return $this;
+    }
+
+    /**
+     * Set Gateway URL
+     *
+     * @param string $gatewayUrl
+     *
+     * @return $this
+     */
+    public function setGatewayUrl($gatewayUrl)
+    {
+        $this->gatewayUrl = $gatewayUrl;
 
         return $this;
     }
@@ -399,7 +437,7 @@ class VictoriaBankGateway
                     VictoriaBank\Authorization\AuthorizationRequest::MERCH_NAME    => $this->merchantName,
                     VictoriaBank\Authorization\AuthorizationRequest::MERCH_URL     => $this->merchantUrl,
                     VictoriaBank\Authorization\AuthorizationRequest::MERCH_ADDRESS => $this->merchantAddress,
-                ], $this->debug
+                ], $this->gatewayUrl, $this->debug, $this->sslVerify
             );
             $request->request();
         } catch (VictoriaBank\Exception $e) {
@@ -436,7 +474,7 @@ class VictoriaBankGateway
                     VictoriaBank\Completion\CompletionRequest::NONCE     => $this->generateNonce(),
                     VictoriaBank\Completion\CompletionRequest::RRN       => $rrn,
                     VictoriaBank\Completion\CompletionRequest::INT_REF   => $intRef,
-                ], $this->debug
+                ], $this->gatewayUrl, $this->debug, $this->sslVerify
             );
 
             return $request->request();
@@ -474,7 +512,7 @@ class VictoriaBankGateway
                     VictoriaBank\Reversal\ReversalRequest::NONCE     => $this->generateNonce(),
                     VictoriaBank\Reversal\ReversalRequest::RRN       => $rrn,
                     VictoriaBank\Reversal\ReversalRequest::INT_REF   => $intRef,
-                ], $this->debug
+                ], $this->gatewayUrl, $this->debug, $this->sslVerify
             );
 
             return $request->request();

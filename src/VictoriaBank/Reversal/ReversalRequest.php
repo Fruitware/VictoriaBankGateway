@@ -112,7 +112,12 @@ class ReversalRequest extends Request
                 'method' => 'POST',
                 'content' => http_build_query($this->_requestFields),
             ],
+            'ssl' => [
+                "verify_peer" => $this->_sslVerify,
+                "verify_peer_name" => $this->_sslVerify,
+            ]
         ];
+
         $context = stream_context_create($options);
         $result  = file_get_contents($this->_gatewayUrl, false, $context);
 
