@@ -153,7 +153,7 @@ switch ($bankResponse::TRX_TYPE) {
         #
 
         # Funds locked on bank side - transfer the product/service to the customer and request completion
-        $victoriaBankGateway->requestCompletion($amount, $bankOrderCode, $rrn, $intRef, $currency = null);
+        $victoriaBankGateway->requestCompletion($bankOrderCode, $amount, $rrn, $intRef, $currency = null);
         break;
 
     case VictoriaBankGateway::TRX_TYPE_COMPLETION:
